@@ -1,0 +1,803 @@
+/* ═══════════════════════════════════════════════════════════════════
+   UDRAH PRODUCT PAGE — "REALITY BY DESIGN" HUD SCI-FI BIOTECH UI
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Root Product Container */
+.hud-product-root {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  transition: background 500ms ease, color 500ms ease;
+  font-family: 'Inter', -apple-system, sans-serif;
+  user-select: none;
+}
+
+/* ─── Mode Themes ─── */
+/* 1. Specimen Mode (Clean White Laboratory) */
+.hud-product-root.mode-specimen {
+  background: #fbfbfa;
+  color: #121513;
+  --hud-border: rgba(0, 0, 0, 0.12);
+  --hud-border-active: #1a1a1a;
+  --hud-line: rgba(0, 0, 0, 0.25);
+  --hud-accent: #e11d48;
+  --hud-accent-green: #15803d;
+  --hud-bg-card: rgba(255, 255, 255, 0.88);
+  --hud-text-muted: #6b7280;
+  --hud-grid: rgba(0, 0, 0, 0.04);
+}
+
+/* 2. Cyber Hologram Mode (Deep Obsidian & Neon Bioluminescence) */
+.hud-product-root.mode-cyber {
+  background: #030705;
+  color: #f1f5f3;
+  --hud-border: rgba(122, 211, 155, 0.22);
+  --hud-border-active: #7AD39B;
+  --hud-line: rgba(122, 211, 155, 0.45);
+  --hud-accent: #38bdf8;
+  --hud-accent-green: #4ade80;
+  --hud-bg-card: rgba(6, 17, 12, 0.85);
+  --hud-text-muted: rgba(205, 212, 203, 0.65);
+  --hud-grid: rgba(122, 211, 155, 0.05);
+}
+
+/* 3. Blueprint Matrix Mode (Cyan Technical Grid & Wireframe) */
+.hud-product-root.mode-blueprint {
+  background: #0b1522;
+  color: #e2e8f0;
+  --hud-border: rgba(56, 189, 248, 0.25);
+  --hud-border-active: #38bdf8;
+  --hud-line: rgba(56, 189, 248, 0.45);
+  --hud-accent: #38bdf8;
+  --hud-accent-green: #22d3ee;
+  --hud-bg-card: rgba(10, 25, 42, 0.88);
+  --hud-text-muted: #94a3b8;
+  --hud-grid: rgba(56, 189, 248, 0.07);
+}
+
+/* ─── Background Grid & Circuits ─── */
+.hud-grid-background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(to right, var(--hud-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--hud-grid) 1px, transparent 1px);
+  background-size: 36px 36px;
+  z-index: 1;
+}
+
+.mode-cyber .hud-grid-background {
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(122, 211, 155, 0.12) 0%, transparent 60%),
+    linear-gradient(to right, var(--hud-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--hud-grid) 1px, transparent 1px);
+  background-size: auto, 40px 40px, 40px 40px;
+}
+
+.mode-blueprint .hud-grid-background {
+  background-image: 
+    linear-gradient(to right, rgba(56, 189, 248, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.08) 1px, transparent 1px),
+    linear-gradient(to right, rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+}
+
+/* ─── Main HUD Stage ─── */
+.hud-stage {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 100px 36px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+@media (min-width: 1440px) {
+  .hud-stage {
+    padding: 110px 60px 50px;
+  }
+}
+
+/* ─── Top HUD Header Bar ─── */
+.hud-header-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 10;
+}
+
+.hud-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hud-brand-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Mono', monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--hud-text-muted);
+}
+
+.hud-main-headline {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2rem, 3.8vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin: 4px 0 0;
+  text-transform: uppercase;
+}
+
+.hud-headline-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  border: 1px solid currentColor;
+  padding: 2px 5px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-left: 8px;
+  letter-spacing: 0.08em;
+}
+
+/* ─── Center: Reality Mode Switcher ─── */
+.hud-reality-switcher {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.hud-switcher-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--hud-bg-card);
+  border: 1px solid var(--hud-border);
+  padding: 5px 14px;
+  border-radius: 30px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.hud-globe-icon {
+  animation: rotateGlobe 12s linear infinite;
+  display: flex;
+  align-items: center;
+}
+
+@keyframes rotateGlobe {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hud-switcher-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hud-mode-buttons {
+  display: flex;
+  gap: 4px;
+  background: var(--hud-bg-card);
+  border: 1px solid var(--hud-border);
+  padding: 3px;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.hud-mode-btn {
+  background: none;
+  border: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--hud-text-muted);
+  transition: all 180ms ease;
+  letter-spacing: 0.06em;
+}
+
+.hud-mode-btn.active {
+  background: var(--hud-border-active);
+  color: var(--hud-product-root);
+  background: #111;
+  color: #fff;
+}
+
+.mode-cyber .hud-mode-btn.active {
+  background: #7AD39B;
+  color: #06110c;
+}
+
+.mode-blueprint .hud-mode-btn.active {
+  background: #38bdf8;
+  color: #0b1522;
+}
+
+/* ─── Top Right Telemetry ─── */
+.hud-telemetry-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--hud-text-muted);
+}
+
+.hud-live-clock {
+  font-weight: 700;
+  color: currentColor;
+}
+
+.hud-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--hud-accent-green);
+  font-weight: 600;
+}
+
+.hud-pulse-node {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+}
+
+/* ─── Central Specimen / Product Showcase ─── */
+.hud-center-stage {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  min-height: 480px;
+}
+
+/* Floating Specimen Island */
+/* ─── Multi-Layered Organic Specimen Composite ─── */
+.hud-specimen-container {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  height: 540px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.hud-floating-specimen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: levitate 6s ease-in-out infinite alternate;
+}
+
+.hud-specimen-composite {
+  position: relative;
+  width: 580px;
+  height: 540px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 1. Big Majestic Living Tree — Positioned higher to arch above the purifier */
+.hud-composite-tree {
+  position: absolute;
+  top: -75px;
+  right: -75px;
+  width: 510px;
+  max-height: 660px;
+  height: auto;
+  object-fit: contain;
+  z-index: 1;
+  filter: drop-shadow(0 20px 35px rgba(16, 38, 26, 0.4));
+  pointer-events: none;
+  transition: all 400ms ease;
+}
+
+.mode-cyber .hud-composite-tree {
+  filter: drop-shadow(0 0 35px rgba(122, 211, 155, 0.55)) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8));
+}
+
+.mode-blueprint .hud-composite-tree {
+  filter: drop-shadow(0 0 28px rgba(56, 189, 248, 0.45)) contrast(1.15);
+}
+
+/* 2. Mossy Rocks Foundation Base — Scaled 20% bigger */
+.hud-composite-rocks {
+  position: absolute;
+  top: 215px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 562px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  z-index: 2;
+  filter: drop-shadow(0 25px 35px rgba(16, 38, 26, 0.45));
+  pointer-events: none;
+}
+
+/* 3. Main UDRAH Purifier Unit — Scaled 10% shorter and centered gracefully on rocks */
+.hud-composite-purifier {
+  position: absolute;
+  top: 175px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 162px;
+  max-height: 230px;
+  height: auto;
+  object-fit: contain;
+  z-index: 4;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.35));
+  transition: all 400ms ease;
+}
+
+.mode-cyber .hud-composite-purifier {
+  filter: drop-shadow(0 0 30px rgba(122, 211, 155, 0.6)) drop-shadow(0 15px 35px rgba(0, 0, 0, 0.85));
+}
+
+.mode-blueprint .hud-composite-purifier {
+  filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.5)) contrast(1.18);
+}
+
+/* 4. Interactive Hotspot Pulse Pins — Aligned to the 162px purifier features */
+.hud-hotspot-pin {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 8;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  transition: transform 200ms ease;
+}
+
+.hud-hotspot-pin:hover {
+  transform: translate(-50%, -50%) scale(1.3);
+}
+
+.pin-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e11d48;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 12px rgba(225, 29, 72, 0.9);
+  position: relative;
+  z-index: 2;
+}
+
+.pin-pulse {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(225, 29, 72, 0.4);
+  animation: pinRing 2s ease-out infinite;
+  z-index: 1;
+}
+
+@keyframes pinRing {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.hud-hotspot-pin.active .pin-dot {
+  background: var(--green);
+  box-shadow: 0 0 14px rgba(122, 211, 155, 0.95);
+}
+
+.hud-hotspot-pin.active .pin-pulse {
+  background: rgba(122, 211, 155, 0.45);
+}
+
+/* Pin Positions precisely framing and highlighting the 162px purifier */
+.hud-hotspot-pin.pin-spectrum {
+  top: 186px;
+  left: 314px;
+}
+
+.hud-hotspot-pin.pin-algae {
+  top: 228px;
+  left: 266px;
+}
+
+.hud-hotspot-pin.pin-filter {
+  top: 303px;
+  left: 258px;
+}
+
+.hud-hotspot-pin.pin-telemetry {
+  top: 350px;
+  left: 318px;
+}
+
+/* Cyber Rings & Concentric Orbits */
+.hud-orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed var(--hud-line);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.hud-orbit-ring.ring-1 {
+  width: 440px;
+  height: 440px;
+  animation: spinSlow 35s linear infinite;
+}
+
+.hud-orbit-ring.ring-2 {
+  width: 560px;
+  height: 560px;
+  border: 1px solid var(--hud-border);
+  animation: spinSlowRev 45s linear infinite;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinSlowRev {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* ─── SVG HUD Connectors & Callout Leader Lines ─── */
+.hud-svg-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.hud-leader-line {
+  stroke: var(--hud-line);
+  stroke-width: 1.25;
+  stroke-dasharray: 4 2;
+  fill: none;
+  animation: dashFlow 20s linear infinite;
+}
+
+@keyframes dashFlow {
+  to { stroke-dashoffset: -100; }
+}
+
+.hud-joint-point {
+  fill: var(--hud-accent);
+}
+
+/* Interactive Callout Cards */
+.hud-callout-card {
+  position: absolute;
+  background: var(--hud-bg-card);
+  border: 1px solid var(--hud-border);
+  border-radius: 6px;
+  padding: 10px 14px;
+  max-width: 220px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  z-index: 10;
+  transition: all 250ms ease;
+  cursor: pointer;
+}
+
+.hud-callout-card:hover,
+.hud-callout-card.active {
+  border-color: var(--hud-border-active);
+  transform: scale(1.04);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18), 0 0 0 1px var(--hud-border-active);
+}
+
+.hud-callout-card.top-left {
+  top: 14%;
+  left: 6%;
+}
+
+.hud-callout-card.top-right {
+  top: 18%;
+  right: 6%;
+}
+
+.hud-callout-card.mid-left {
+  bottom: 24%;
+  left: 8%;
+}
+
+.hud-callout-card.bottom-right {
+  bottom: 14%;
+  right: 8%;
+}
+
+.hud-card-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hud-text-muted);
+  margin-bottom: 2px;
+  display: block;
+}
+
+.hud-card-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+
+.hud-card-desc {
+  font-size: 0.72rem;
+  color: var(--hud-text-muted);
+  line-height: 1.35;
+  margin: 0;
+}
+
+.hud-card-pin {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--hud-accent);
+  margin-right: 5px;
+}
+
+/* ─── Bottom HUD Modules ─── */
+.hud-bottom-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: flex-end;
+  gap: 24px;
+  width: 100%;
+  z-index: 10;
+}
+
+/* Bottom Left: Core Threads Box */
+.hud-box-threads {
+  background: var(--hud-bg-card);
+  border: 1px solid var(--hud-border);
+  border-radius: 8px;
+  padding: 14px 18px;
+  max-width: 320px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.hud-box-header {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hud-text-muted);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hud-thread-item {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.66rem;
+  color: var(--hud-text-muted);
+  padding: 3px 0;
+  border-bottom: 1px dashed var(--hud-grid);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hud-thread-item span.index {
+  color: var(--hud-accent);
+  font-weight: 700;
+}
+
+.hud-barcode-svg {
+  margin-top: 8px;
+  opacity: 0.7;
+}
+
+/* Bottom Center Tagline */
+.hud-bottom-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.hud-center-tagline {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--hud-text-muted);
+  font-weight: 600;
+}
+
+.hud-center-brackets {
+  font-size: 0.75rem;
+  color: var(--hud-border-active);
+}
+
+/* Bottom Right: Purchase & Specimen Box */
+.hud-box-action {
+  background: var(--hud-bg-card);
+  border: 1px solid var(--hud-border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  max-width: 340px;
+  justify-self: end;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.hud-action-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.hud-action-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border: 1px solid var(--hud-border-active);
+  border-radius: 3px;
+  color: var(--hud-border-active);
+}
+
+.hud-action-price {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.hud-action-copy {
+  font-size: 0.75rem;
+  color: var(--hud-text-muted);
+  line-height: 1.4;
+  margin: 0 0 12px;
+}
+
+.hud-btn-bag {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.mode-cyber .hud-btn-bag {
+  background: #7AD39B;
+  color: #06110c;
+}
+
+.mode-blueprint .hud-btn-bag {
+  background: #38bdf8;
+  color: #0b1522;
+}
+
+.hud-btn-bag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+/* ─── Blueprint Specific Widgets ─── */
+.hud-blueprint-side-widgets {
+  position: absolute;
+  right: 36px;
+  top: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 10;
+}
+
+.hud-telemetry-box {
+  background: var(--hud-bg-card);
+  border: 1px solid var(--hud-border);
+  border-radius: 6px;
+  padding: 12px;
+  width: 170px;
+  font-family: 'Space Mono', monospace;
+}
+
+.hud-bars-wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 36px;
+  margin-top: 8px;
+}
+
+.hud-bar {
+  flex: 1;
+  background: var(--hud-accent);
+  border-radius: 2px 2px 0 0;
+  transition: height 300ms ease;
+}
+
+/* ─── Responsive HUD ─── */
+@media (max-width: 1024px) {
+  .hud-bottom-bar {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .hud-box-action {
+    justify-self: stretch;
+    max-width: 100%;
+  }
+  .hud-box-threads {
+    max-width: 100%;
+  }
+  .hud-callout-card {
+    position: static;
+    max-width: 100%;
+    margin-bottom: 8px;
+  }
+  .hud-svg-overlay {
+    display: none;
+  }
+  .hud-stage {
+    padding: 90px 20px 30px;
+  }
+  .hud-header-bar {
+    flex-direction: column;
+    gap: 16px;
+  }
+}

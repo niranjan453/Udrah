@@ -1,0 +1,350 @@
+/* ═══════════════════════════════════════
+   3D REEL CAROUSEL — High-Performance Player
+   ═══════════════════════════════════════ */
+
+.rc-carousel {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: grab;
+  padding-bottom: 40px;
+  overflow: hidden;
+}
+
+.rc-carousel:active {
+  cursor: grabbing;
+}
+
+/* 3D Scene container */
+.rc-scene {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+}
+
+/* Base Card */
+.rc-card {
+  position: absolute;
+  width: 240px;
+  height: 426px; /* 9:16 aspect ratio */
+  border-radius: 18px;
+  overflow: hidden;
+  background: #08130d;
+  border: 1px solid rgba(122, 211, 155, 0.2);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  transition:
+    transform  540ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity    540ms ease,
+    filter     540ms ease,
+    box-shadow 540ms ease;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Media wrapper & Video */
+.rc-media-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.rc-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.rc-video-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(7, 17, 12, 0.55) 0%,
+    rgba(7, 17, 12, 0.05) 35%,
+    rgba(7, 17, 12, 0.3) 65%,
+    rgba(7, 17, 12, 0.92) 100%
+  );
+  pointer-events: none;
+}
+
+/* ─── Center Card: Fully visible & Interactive ─── */
+.rc-card.rc-center {
+  transform: translateX(0) translateZ(0) scale(1) rotateY(0deg);
+  z-index: 5;
+  opacity: 1;
+  filter: brightness(1);
+  box-shadow: 0 24px 72px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(122, 211, 155, 0.35);
+}
+
+/* ─── Left Card: Angled in 3D ─── */
+.rc-card.rc-left {
+  transform: translateX(-210px) translateZ(-90px) rotateY(26deg) scale(0.85);
+  z-index: 2;
+  opacity: 0.75;
+  filter: brightness(0.6) saturate(0.8);
+  cursor: pointer;
+}
+
+/* ─── Right Card: Angled in 3D ─── */
+.rc-card.rc-right {
+  transform: translateX(210px) translateZ(-90px) rotateY(-26deg) scale(0.85);
+  z-index: 2;
+  opacity: 0.75;
+  filter: brightness(0.6) saturate(0.8);
+  cursor: pointer;
+}
+
+.rc-card.rc-left:hover,
+.rc-card.rc-right:hover {
+  filter: brightness(0.85) saturate(1);
+  opacity: 0.92;
+}
+
+/* ─── Top Instagram Badge Overlay ─── */
+.rc-top-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 6;
+}
+
+.rc-author-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(7, 17, 12, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 4px 10px 4px 4px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.rc-author-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.rc-author-avatar img {
+  width: 14px;
+  height: auto;
+}
+
+.rc-author-handle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--bg-ivory);
+}
+
+.rc-ig-link {
+  background: rgba(7, 17, 12, 0.65);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--bg-ivory);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 180ms ease;
+  text-decoration: none;
+}
+
+.rc-ig-link:hover {
+  background: var(--green);
+  color: var(--bg-dark);
+  transform: scale(1.1);
+}
+
+/* ─── Bottom Reel Caption & Stats ─── */
+.rc-bottom-caption {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  z-index: 6;
+  text-align: left;
+}
+
+.rc-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--bg-ivory);
+  margin: 0 0 4px;
+}
+
+.rc-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  color: rgba(205, 212, 203, 0.85);
+  line-height: 1.35;
+  margin: 0 0 8px;
+}
+
+.rc-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--green);
+}
+
+/* ─── Center Sound Controls ─── */
+.rc-center-controls {
+  position: absolute;
+  bottom: 96px;
+  right: 14px;
+  z-index: 8;
+}
+
+.rc-sound-btn {
+  background: rgba(7, 17, 12, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: all 180ms ease;
+}
+
+.rc-sound-btn:hover {
+  background: rgba(122, 211, 155, 0.25);
+  border-color: var(--green);
+  transform: scale(1.1);
+}
+
+/* Side Card Overlay */
+.rc-side-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(7, 17, 12, 0.35);
+}
+
+.rc-side-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(7, 17, 12, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+}
+
+/* ─── Nav Buttons ─── */
+.rc-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(10, 24, 18, 0.85);
+  border: 1px solid rgba(122, 211, 155, 0.3);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: all 200ms ease;
+  color: var(--bg-ivory);
+}
+
+.rc-nav:hover {
+  background: var(--green);
+  color: var(--bg-dark);
+  border-color: var(--green);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.rc-nav-prev { left: 8px; }
+.rc-nav-next { right: 8px; }
+
+/* ─── Dot Indicators ─── */
+.rc-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.rc-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(205, 212, 203, 0.25);
+  cursor: pointer;
+  padding: 0;
+  transition: all 250ms ease;
+}
+
+.rc-dot.rc-dot-on {
+  background: var(--green);
+  width: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(122, 211, 155, 0.6);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .rc-card {
+    width: 200px;
+    height: 355px;
+  }
+  .rc-scene {
+    height: 370px;
+  }
+  .rc-card.rc-left {
+    transform: translateX(-150px) translateZ(-60px) rotateY(20deg) scale(0.85);
+  }
+  .rc-card.rc-right {
+    transform: translateX(150px) translateZ(-60px) rotateY(-20deg) scale(0.85);
+  }
+}

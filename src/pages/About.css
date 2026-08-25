@@ -1,0 +1,1158 @@
+/* ==========================================================================
+   ABOUT — Our People & Events
+   Luxury Biotech Design System
+   ========================================================================== */
+
+/* ─── Page Root ──────────────────────────────────────────────────── */
+.about-page {
+  min-height: 100vh;
+  background: var(--bg-light);
+  background-image: radial-gradient(circle, rgba(78, 124, 93, 0.08) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ─── Main Layout ────────────────────────────────────────────────── */
+.about-layout {
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 40px);
+  padding: 100px 48px 60px;
+  position: relative;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+/* ─── Left Column ────────────────────────────────────────────────── */
+.about-left {
+  flex: 0 0 42%;
+  max-width: 42%;
+  padding-right: 40px;
+  position: relative;
+  z-index: 5;
+}
+
+.about-heading {
+  margin-bottom: 24px;
+  line-height: 1;
+}
+
+.about-heading-italic {
+  display: block;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(2.8rem, 5vw, 4.6rem);
+  font-weight: 400;
+  color: var(--sage);
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.about-heading-bold {
+  display: block;
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(3.2rem, 6vw, 5.6rem);
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.03em;
+  line-height: 0.96;
+}
+
+.about-body {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.92rem, 1.2vw, 1rem);
+  line-height: 1.75;
+  color: var(--text-mid);
+  max-width: 360px;
+  margin-bottom: 44px;
+  font-weight: 400;
+}
+
+/* ─── Meet the Team Link ─────────────────────────────────────────── */
+.about-meet-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+  max-width: 360px;
+  cursor: pointer;
+  transition: opacity 200ms ease, border-color 200ms ease;
+  user-select: none;
+}
+
+.about-meet-row:hover {
+  border-color: var(--sage);
+}
+
+.about-meet-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  transition: color 200ms ease;
+}
+
+.about-meet-row:hover .about-meet-label {
+  color: var(--sage);
+}
+
+.about-meet-arrow {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  transition: transform 300ms ease, color 200ms ease;
+}
+
+.about-meet-row:hover .about-meet-arrow {
+  transform: translateX(6px);
+  color: var(--sage);
+}
+
+/* ─── Right Column — Staggered Editorial Grid ────────────────────── */
+.about-right {
+  flex: 1;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px 16px;
+  align-items: stretch;
+  padding: 10px 0 20px;
+}
+
+/* ─── Photo Card Base ────────────────────────────────────────────── */
+.photo-card {
+  position: relative;
+  background: var(--bg-ivory);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow:
+    0 8px 24px rgba(17, 22, 19, 0.05),
+    0 2px 6px rgba(17, 22, 19, 0.03);
+  overflow: hidden;
+  transition: transform 300ms cubic-bezier(.34,1.56,.64,1), box-shadow 300ms ease, border-color 300ms ease;
+  cursor: pointer;
+  user-select: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.photo-card:hover {
+  box-shadow:
+    0 16px 40px rgba(17, 22, 19, 0.12),
+    0 0 0 1px var(--green);
+  border-color: var(--green);
+  transform: translateY(-6px) scale(1.02) !important;
+  z-index: 20 !important;
+}
+
+/* Card number badge */
+.photo-card::before {
+  content: attr(data-num);
+  position: absolute;
+  top: 7px;
+  left: 9px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--sage);
+  z-index: 5;
+  letter-spacing: 0.08em;
+}
+
+/* Photo Area */
+.photo-card-img {
+  width: 100%;
+  aspect-ratio: 1 / 1.05;
+  background: #E8E4DA;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.photo-card-real-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 400ms ease;
+}
+
+.photo-card:hover .photo-card-real-img {
+  transform: scale(1.05);
+}
+
+.photo-card-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(255,255,255,0.12) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* Silhouette icon placeholder */
+.photo-placeholder-icon {
+  opacity: 0.22;
+  color: var(--text-mid);
+}
+
+/* Name strip at bottom */
+.photo-card-name {
+  padding: 10px 12px 12px;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  letter-spacing: -0.01em;
+  background: var(--bg-ivory);
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
+.photo-card-role {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--sage);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Subtle Tilts (Natural & Aligned) ───────────────────────────── */
+.card-01 { transform: rotate(-1.2deg); }
+.card-02 { transform: rotate(1deg); }
+.card-03 { transform: rotate(-1deg); }
+.card-04 { transform: rotate(1.2deg); }
+.card-05 { transform: rotate(-0.8deg); }
+.card-06 { transform: rotate(1.2deg); }
+
+/* ─── Doodle Decorations ─────────────────────────────────────────── */
+.doodle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.55;
+  color: var(--sage);
+}
+
+/* Zigzag — sits top-center */
+.doodle-zigzag {
+  top: -24px;
+  right: 32%;
+}
+
+/* Spiral — lower right corner */
+.doodle-spiral {
+  bottom: -20px;
+  right: -10px;
+}
+
+/* Star — center-left gap */
+.doodle-star {
+  top: 46%;
+  left: -24px;
+}
+
+/* Pin — pinned above card 01 */
+.doodle-pin {
+  top: -24px;
+  left: 14%;
+}
+
+/* ─── Gentle Floating animation (vertical only, no collision) ─────── */
+@media (prefers-reduced-motion: no-preference) {
+  .card-01 { animation: float-gentle 5s ease-in-out infinite; }
+  .card-02 { animation: float-gentle 5.6s ease-in-out infinite 0.6s; }
+  .card-03 { animation: float-gentle 4.8s ease-in-out infinite 1.2s; }
+  .card-04 { animation: float-gentle 5.4s ease-in-out infinite 0.4s; }
+  .card-05 { animation: float-gentle 4.6s ease-in-out infinite 0.9s; }
+  .card-06 { animation: float-gentle 5.8s ease-in-out infinite 0.2s; }
+}
+
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-5px); }
+}
+
+/* ==========================================================================
+   PROFILE SPOTLIGHT POPUP MODAL — Luxury Biotech Edition
+   ========================================================================== */
+.profile-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 17, 12, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+  animation: modalFadeIn 300ms ease forwards;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.profile-modal-board {
+  position: relative;
+  width: 100%;
+  max-width: 840px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: var(--bg-mid);
+  border: 1px solid rgba(122, 211, 155, 0.16);
+  border-radius: 20px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.65);
+  padding: 44px 52px 40px;
+  animation: modalPopIn 380ms cubic-bezier(.34,1.56,.64,1) forwards;
+  overflow-x: hidden;
+}
+
+@keyframes modalPopIn {
+  from { opacity: 0; transform: scale(0.94) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ─── Modal Header Row ───────────────────────────────────────────── */
+.modal-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.modal-number {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--green);
+  text-transform: uppercase;
+}
+
+.modal-close-btn {
+  background: rgba(250, 247, 240, 0.08);
+  color: var(--bg-ivory);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  border: 1px solid rgba(250, 247, 240, 0.14);
+  cursor: pointer;
+  transition: all 250ms ease;
+}
+
+.modal-close-btn:hover {
+  transform: rotate(90deg) scale(1.1);
+  background: var(--green);
+  color: var(--bg-dark);
+  border-color: var(--green);
+}
+
+/* ─── Modal Body Grid ────────────────────────────────────────────── */
+.modal-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 44px;
+  align-items: center;
+  margin-bottom: 36px;
+}
+
+/* ─── Left Info Column ───────────────────────────────────────────── */
+.modal-info-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-person-name {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 700;
+  color: var(--bg-ivory);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+}
+
+.modal-name-first,
+.modal-name-last {
+  display: block;
+}
+
+.modal-person-role {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--green);
+  margin-bottom: 22px;
+  font-weight: 400;
+}
+
+.modal-person-bio {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--text-soft);
+  font-weight: 400;
+  margin-bottom: 28px;
+}
+
+/* Previous/Next Navigator arrows */
+.modal-nav-row {
+  display: flex;
+  gap: 12px;
+}
+
+.modal-nav-arrow-btn {
+  background: rgba(250, 247, 240, 0.06);
+  border: 1px solid rgba(250, 247, 240, 0.16);
+  color: var(--bg-ivory);
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 250ms ease;
+}
+
+.modal-nav-arrow-btn:hover {
+  background: var(--green);
+  color: var(--bg-dark);
+  border-color: var(--green);
+  transform: translateY(-2px);
+}
+
+/* ─── Right Photo Column ─────────────────────────────────────────── */
+.modal-photo-col {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+}
+
+/* Doodle: Top Ray + Word */
+.modal-doodle-top {
+  position: absolute;
+  top: -12px;
+  right: 80px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 10;
+}
+
+.doodle-handwritten {
+  font-family: 'Cormorant Garamond', cursive;
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--green);
+  font-weight: 600;
+  transform: rotate(-6deg);
+}
+
+.modal-doodle-spring {
+  position: absolute;
+  top: 40px;
+  right: -10px;
+  z-index: 10;
+  color: var(--sage);
+}
+
+/* Polaroid Photo Frame */
+.modal-polaroid-frame {
+  position: relative;
+  background: var(--bg-ivory);
+  padding: 14px 14px 28px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow:
+    0 16px 40px rgba(0,0,0,0.4),
+    0 0 0 1px rgba(255,255,255,0.06);
+  transform: rotate(2deg);
+  transition: transform 350ms cubic-bezier(.34,1.56,.64,1);
+  width: 260px;
+  z-index: 5;
+}
+
+.modal-polaroid-frame:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.modal-polaroid-img-box {
+  width: 100%;
+  aspect-ratio: 1/1.08;
+  background: #E8E4DA;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-polaroid-real-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.modal-polaroid-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+}
+
+.modal-polaroid-script {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  right: 12px;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  letter-spacing: 0.02em;
+}
+
+.modal-doodle-stamp {
+  position: absolute;
+  bottom: 80px;
+  right: -24px;
+  z-index: 12;
+  transform: rotate(8deg);
+}
+
+.stamp-oval {
+  border: 1.5px solid var(--green);
+  border-radius: 50%;
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-mid);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+.stamp-oval span {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--green);
+  font-weight: 700;
+}
+
+/* ─── Modal Footer ───────────────────────────────────────────────── */
+.modal-footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(250, 247, 240, 0.1);
+  padding-top: 18px;
+}
+
+.modal-footer-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.modal-footer-arrow {
+  font-size: 1.1rem;
+  color: var(--green);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .about-layout {
+    flex-direction: column;
+    padding: 100px 32px 60px;
+    gap: 48px;
+  }
+
+  .about-left {
+    flex: none;
+    max-width: 100%;
+    padding-right: 0;
+  }
+
+  .about-right {
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 16px;
+  }
+
+  .about-body {
+    max-width: 100%;
+  }
+
+  .about-meet-row {
+    max-width: 100%;
+  }
+
+  .modal-body-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .modal-photo-col {
+    min-height: 320px;
+  }
+
+  .profile-modal-board {
+    padding: 28px 24px 20px;
+  }
+}
+
+@media (max-width: 680px) {
+  .about-right {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 12px;
+  }
+
+  .modal-polaroid-frame {
+    width: 200px;
+  }
+
+  .modal-doodle-stamp {
+    right: 0px;
+    bottom: 20px;
+  }
+
+  .modal-doodle-spring {
+    right: 10px;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   EVENTS & WINS — 3D FAN CAROUSEL (BIOTECH SYSTEM)
+═══════════════════════════════════════════════════════════════ */
+
+.ev-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg-dark);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Three.js canvas */
+.events-canvas-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Ambient glow */
+.ev-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 60%, rgba(122,211,155,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 15% 80%, rgba(78,124,93,0.08) 0%, transparent 70%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Content container */
+.ev-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  padding: 100px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+.ev-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ev-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin: 0;
+}
+
+.ev-headline {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--bg-ivory);
+  line-height: 1.05;
+  margin: 0;
+}
+
+.ev-subtext {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--text-soft);
+  max-width: 520px;
+  margin: 4px auto 0;
+}
+
+/* ── Pill Tabs ───────────────────────────────────────────── */
+.ev-pills {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ev-pill {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: 1px solid rgba(205, 212, 203, 0.18);
+  background: rgba(250, 247, 240, 0.03);
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: all 250ms ease;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+
+.ev-pill:hover {
+  border-color: rgba(122, 211, 155, 0.5);
+  color: var(--bg-ivory);
+  background: rgba(122, 211, 155, 0.08);
+}
+
+.ev-pill.active {
+  background: var(--green);
+  color: var(--bg-dark);
+  border-color: var(--green);
+  font-weight: 600;
+  box-shadow: 0 4px 18px rgba(122, 211, 155, 0.28);
+}
+
+/* ── 3D Perspective Carousel ─────────────────────────────── */
+.ev-carousel-wrap {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+}
+
+.ev-card {
+  position: absolute;
+  width: 320px;
+  height: 410px;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 580ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform, filter, z-index;
+  transform-style: preserve-3d;
+  border: 1px solid rgba(122, 211, 155, 0.08);
+}
+
+/* Center card */
+.ev-card[data-pos="0"] {
+  transform: translateX(0px) scale(1) rotateY(0deg);
+  z-index: 10;
+  filter: brightness(1) saturate(1);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(122, 211, 155, 0.25);
+}
+
+/* Adjacent left */
+.ev-card[data-pos="-1"] {
+  transform: translateX(-275px) scale(0.8) rotateY(15deg);
+  z-index: 8;
+  filter: brightness(0.55) saturate(0.65);
+}
+
+/* Adjacent right */
+.ev-card[data-pos="1"] {
+  transform: translateX(275px) scale(0.8) rotateY(-15deg);
+  z-index: 8;
+  filter: brightness(0.55) saturate(0.65);
+}
+
+/* Far left */
+.ev-card[data-pos="-2"] {
+  transform: translateX(-480px) scale(0.6) rotateY(24deg);
+  z-index: 6;
+  filter: brightness(0.3) saturate(0.4);
+}
+
+/* Far right */
+.ev-card[data-pos="2"] {
+  transform: translateX(480px) scale(0.6) rotateY(-24deg);
+  z-index: 6;
+  filter: brightness(0.3) saturate(0.4);
+}
+
+.ev-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* Active card gradient overlay + info */
+.ev-card-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 60px 24px 24px;
+  background: linear-gradient(to top, rgba(7, 17, 12, 0.95) 0%, rgba(7, 17, 12, 0.6) 60%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: none;
+}
+
+.ev-card-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.ev-card-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--bg-ivory);
+  margin: 0;
+  line-height: 1.15;
+}
+
+.ev-card-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  margin: 0;
+}
+
+/* Side cards — subtle indicator */
+.ev-card-side-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  background: rgba(7, 17, 12, 0.35);
+}
+
+/* ── Bottom Nav ──────────────────────────────────────────── */
+.ev-bottom-nav {
+  display: flex;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.ev-nav-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(205, 212, 203, 0.2);
+  background: rgba(250, 247, 240, 0.05);
+  color: var(--bg-ivory);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 230ms ease;
+  backdrop-filter: blur(8px);
+}
+
+.ev-nav-btn:hover {
+  background: rgba(122, 211, 155, 0.15);
+  border-color: var(--green);
+  color: var(--green);
+  transform: scale(1.08);
+}
+
+/* ── Popup Lightbox (Biotech Style) ───────────────────────── */
+.events-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 17, 12, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: evPopFadeIn 250ms ease;
+  padding: 24px;
+}
+
+@keyframes evPopFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.events-popup-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 920px;
+  animation: evPopSlideUp 300ms ease;
+}
+
+@keyframes evPopSlideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.events-popup-close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(250, 247, 240, 0.08);
+  border: 1px solid rgba(250, 247, 240, 0.15);
+  color: var(--bg-ivory);
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 250ms ease;
+  z-index: 10;
+}
+
+.events-popup-close:hover {
+  background: var(--green);
+  color: var(--bg-dark);
+  border-color: var(--green);
+  transform: rotate(90deg) scale(1.1);
+}
+
+.events-popup-img-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--bg-mid);
+  border: 1px solid rgba(122, 211, 155, 0.15);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.8);
+}
+
+.events-popup-img {
+  width: 100%;
+  max-height: 68vh;
+  object-fit: contain;
+  display: block;
+}
+
+.events-popup-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(7, 17, 12, 0.65);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(250, 247, 240, 0.2);
+  color: var(--bg-ivory);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 250ms ease;
+  z-index: 5;
+}
+
+.events-popup-nav:hover {
+  background: var(--green);
+  color: var(--bg-dark);
+  border-color: var(--green);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.events-popup-nav.prev { left: 16px; }
+.events-popup-nav.next { right: 16px; }
+
+.events-popup-info {
+  text-align: center;
+  color: var(--bg-ivory);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.events-popup-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin: 0;
+}
+
+.events-popup-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--bg-ivory);
+  margin: 0;
+}
+
+.events-popup-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text-soft);
+  margin: 0;
+}
+
+.events-popup-counter {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  margin: 4px 0 0;
+}
+
+/* ── 3D Carousel Responsive ──────────────────────────────── */
+@media (max-width: 1024px) {
+  .ev-content {
+    padding: 70px 24px;
+    gap: 28px;
+  }
+  .ev-pills {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100vw;
+    justify-content: flex-start;
+    padding: 6px 20px 14px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .ev-pills::-webkit-scrollbar { display: none; }
+  .ev-pill {
+    flex-shrink: 0;
+  }
+  .ev-card {
+    width: 270px;
+    height: 360px;
+  }
+  .ev-card[data-pos="-1"] { transform: translateX(-200px) scale(0.8) rotateY(15deg); }
+  .ev-card[data-pos="1"]  { transform: translateX(200px) scale(0.8) rotateY(-15deg); }
+  .ev-card[data-pos="-2"] { transform: translateX(-350px) scale(0.6) rotateY(22deg); }
+  .ev-card[data-pos="2"]  { transform: translateX(350px) scale(0.6) rotateY(-22deg); }
+}
+
+@media (max-width: 640px) {
+  .ev-content {
+    padding: 48px 16px;
+    gap: 20px;
+  }
+  .ev-carousel-wrap {
+    height: 380px;
+    touch-action: pan-y;
+    cursor: grab;
+  }
+  .ev-carousel-wrap:active {
+    cursor: grabbing;
+  }
+  .ev-card {
+    width: 250px;
+    height: 340px;
+  }
+  .ev-card[data-pos="-1"] { transform: translateX(-120px) scale(0.82) rotateY(14deg); }
+  .ev-card[data-pos="1"]  { transform: translateX(120px) scale(0.82) rotateY(-14deg); }
+  .ev-card[data-pos="-2"] { opacity: 0; pointer-events: none; }
+  .ev-card[data-pos="2"]  { opacity: 0; pointer-events: none; }
+  .ev-pill {
+    padding: 8px 16px;
+    font-size: 0.76rem;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .ev-nav-btn {
+    width: 52px;
+    height: 52px;
+  }
+  .ev-nav-btn:active,
+  .ev-pill:active,
+  .photo-card:active {
+    transform: scale(0.95);
+  }
+}

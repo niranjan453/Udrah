@@ -1,0 +1,97 @@
+/* ─── Reserve Page — Premium Biotech ─────────────────────────────── */
+.reserve-hero {
+  padding-top: 160px;
+  padding-bottom: 120px;
+  position: relative;
+  background: var(--bg-dark);
+}
+
+.reserve-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 900px) {
+  .reserve-grid { grid-template-columns: 1fr; gap: 56px; }
+}
+
+.reserve-copy { }
+
+.reserve-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.reserve-benefit {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* ─── Form ───────────────────────────────────────────────────────── */
+.reserve-form-wrap {
+  padding: 48px 44px;
+  position: sticky;
+  top: 120px;
+  background: var(--bg-mid);
+  border: 1px solid rgba(122, 211, 155, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+}
+@media (max-width: 900px) {
+  .reserve-form-wrap { position: static; padding: 36px 28px; }
+}
+
+.reserve-form { display: flex; flex-direction: column; gap: 0; }
+
+.form-field { margin-bottom: 22px; }
+
+.form-label {
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}
+
+.form-input {
+  width: 100%;
+  background: rgba(250, 247, 240, 0.04);
+  border: 1px solid rgba(205, 212, 203, 0.16);
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: var(--bg-ivory);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  transition: border-color 280ms ease, background 280ms ease;
+  outline: none;
+}
+.form-input::placeholder { color: rgba(205, 212, 203, 0.3); }
+.form-input:focus {
+  border-color: var(--green);
+  background: rgba(122, 211, 155, 0.05);
+}
+
+.form-footnote {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 16px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ─── Success ────────────────────────────────────────────────────── */
+.form-success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 300px;
+  justify-content: center;
+}
